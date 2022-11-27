@@ -1,37 +1,11 @@
 # Today I Learned
 
-## [JS](JavaScript)
+## [JS](JavaScript.md)
 
-#html
+#### input 태그 연결하기
 
-- dks
-- dks
-- dks
-- dks
-- dks
-- dks
-- dks
-- dks
-- dks
-- dks
-- dks
-- dks
-- dks
-- dks
-- dks
-- dks
-- dks
-- dks
-- dks
-- dks
-- dks
-- dks
-- dks
-- dks
-- dks
-  </br>
+#### 자식 태그 개수 가져오기
 
-#css
-</br>
+#### 부모 태그 가져오기
 
-# JavaScript
+#### 태그에 클래스 넣기
