@@ -43,17 +43,6 @@ let post = '우동 맛집';
   </br>
   </br>
 
-#### **태그에 style 속성 주기**
-
-```JSX
-<div style={{color: 'red', fontSize: '16px'}}>블로그</div>
-```
-
-- style을 줄 땐, object 형식으로 줘야 한다. </br>
-  font-size를 fontSize로 표현하는 이유는 자바스크립트에선 -는 빼기 연산자이기 때문이다.
-  </br>
-  </br>
-
 #### **return 안에는 태그 1개로 묶어서 사용한다.**
 
 ```JSX
