@@ -45,3 +45,17 @@ btn.classList.toggle("profile-hidden");
 - toggle은 클래스가 있을 땐 삭제해주고, 없을 땐 넣어주는 역할을 한다.
   </br>
   </br>
+
+### **Destructuring 문법**
+
+```js
+// Destructuring 문법 사용 X
+let num = [1, 2];
+let num1 = num[0];
+let num2 = num[1];
+
+// Destructuring 문법 사용 O
+let [num1, num2] = [1, 2];
+```
+
+- 간단하게 array를 각각의 변수로 빼서 쓸 수 있다.
