@@ -115,3 +115,30 @@ function App() {
   즉, 자주 변경될 것 같은 html은 state로 작성한다.
   </br>
   </br>
+
+#### **버튼 누를 때 숫자 1씩 증가시키기**
+
+```JSX
+import { useState } from 'react';
+
+function App() {
+  let [count, setCount] = useState(0);
+
+  return (
+    <div className="App">
+      <button type="button" className="like-btn" onClick={()=>{setCount(count + 1)}}>
+        👍
+      </button>
+      <span className="like-count" onClick={}>
+        {likeCount)}
+      </span>
+    </div>
+  );
+}
+
+```
+
+- onClick={} 안에는 항상 함수명이나 함수 문법을 넣어줘야 한다.</br>
+  state의 값을 변경하고 싶을 땐 두 번째 인자를 사용한다. 두 번째 인자는 함수라서 **함수명(변경할 값)** 이렇게 사용하면 state 값이 변경된다.
+  </br>
+  </br>
