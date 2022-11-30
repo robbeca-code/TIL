@@ -59,3 +59,38 @@ let [num1, num2] = [1, 2];
 ```
 
 - 간단하게 array를 각각의 변수로 빼서 쓸 수 있다.
+  </br>
+  </br>
+
+### **배열의 값만 출력해서 가져오기**
+
+```js
+// Destructuring 문법 사용 X
+let clothes = ["양말", "바지"];
+let copyClothes = [...clothes];
+```
+
+- ...문법은 **배열의 값만 출력**해서 새로운 배열을 생성하게 해주는 문법이다.
+  </br>
+  </br>
+
+### **배열 정렬하기**
+
+```js
+let arr = [1, 4, 2, 7, 5];
+
+// 오름차순 정렬
+console.log(arr.sort());
+
+// 내림차순 정렬
+arr.sort((a, b) => {
+  return b - a;
+});
+console.log(arr);
+```
+
+- **sort(compareFunction)** compareFunction에서 리턴값이 0보다 작으면 a가 b 앞에 오도록 정렬하고,</br>
+  리턴 값이 0보다 클 경우, b가 a보다 앞에 오도록 정렬한다.</br>
+  만약 0을 리턴하면 a와 b 순서를 바꾸지 않는다.
+  </br></br>
+- 원본 배열이 정렬되고, 리턴하는 값 또한 원본 배열을 가리키고 있다는 걸 기억하자.
