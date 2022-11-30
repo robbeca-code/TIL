@@ -142,3 +142,35 @@ function App() {
   state의 값을 변경하고 싶을 땐 두 번째 인자를 사용한다. 두 번째 인자는 함수라서 **함수명(변경할 값)** 이렇게 사용하면 state 값이 변경된다.
   </br>
   </br>
+
+#### **state가 변경이 될 때와 안될 때**
+
+```JSX
+import { useState } from 'react';
+
+function App() {
+  let [title, setTitle] = useState(['여자 코트 추천', '여자 가방 추천']);
+
+  return (
+    <div className="App">
+      <button type="button" className="like-btn" onClick={()=>{
+          // 변경이 안되는 틀린 코드
+          title[0] = '남자 코트 추천';
+          setTitle(title);
+
+
+          // 변경이 되는 옳은 코드
+          let copyTitle = [...title];
+          copyTitle[0] = '남자 코트 추천';
+          setTitle(copyTitle);
+        }}>
+        제목 수정
+      </button>
+    </div>
+  );
+}
+```
+
+- state를 변경할 때는 **원본값의 내용이 변경**되는게 아니라, 아예 **다른 변수로 변경되어야** 원하는 값으로 변경된다.
+  </br>
+  </br>
