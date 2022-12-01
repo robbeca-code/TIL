@@ -1,6 +1,6 @@
 # [React](README.md)
 
-#### **React 장점 2가지**
+### **React 장점 2가지**
 
 1. Single Page Application 개발할 때 사용한다. (새로고침 없이 부드럽게 앱처럼 동작할 수 있다.)
 
@@ -8,19 +8,19 @@
    </br>
    </br>
 
-#### **JSX란**
+### **JSX란**
 
 - 자바스립트와 HTML 문법을 같이 쓸 수 있는 문법이다.
   </br>
   </br>
 
-#### **태그에 클래스를 줄 때 className이라고 써야하는 이유**
+### **태그에 클래스를 줄 때 className이라고 써야하는 이유**
 
 - 자바스크립트에서 class라는 개념이 따로 있어서 똑같이 class라고 주면 겹치기 때문이다.
   </br>
   </br>
 
-#### **데이터바인딩**
+### **데이터바인딩**
 
 ```JSX
 let post = '우동 맛집';
@@ -32,7 +32,7 @@ let post = '우동 맛집';
   </br>
   </br>
 
-#### **태그에 style 속성 주기**
+### **태그에 style 속성 주기**
 
 ```JSX
 <div style={{color: 'red', fontSize: '16px'}}>블로그</div>
@@ -43,7 +43,7 @@ let post = '우동 맛집';
   </br>
   </br>
 
-#### **return 안에는 태그 1개로 묶어서 사용한다.**
+### **return 안에는 태그 1개로 묶어서 사용한다.**
 
 ```JSX
 //function은 생략했다.
@@ -67,7 +67,7 @@ return (
   </br>
   </br>
 
-#### **자료를 잠깐 저장할 때 state 사용하기**
+### **자료를 잠깐 저장할 때 state 사용하기**
 
 ```JSX
 import { useState } from 'react';
@@ -89,7 +89,7 @@ function App() {
   </br>
   </br>
 
-#### **useState는 언제 사용해야 하는가**
+### **useState는 언제 사용해야 하는가**
 
 ```JSX
 import { useState } from 'react';
@@ -116,7 +116,7 @@ function App() {
   </br>
   </br>
 
-#### **버튼 누를 때 숫자 1씩 증가시키기**
+### **버튼 누를 때 숫자 1씩 증가시키기**
 
 ```JSX
 import { useState } from 'react';
@@ -143,7 +143,7 @@ function App() {
   </br>
   </br>
 
-#### **state가 변경이 될 때와 안될 때**
+### **state가 변경이 될 때와 안될 때**
 
 ```JSX
 import { useState } from 'react';
@@ -172,5 +172,137 @@ function App() {
 ```
 
 - state를 변경할 때는 **원본값의 내용이 변경**되는게 아니라, 아예 **다른 변수로 변경되어야** 원하는 값으로 변경된다.
+  </br>
+  </br>
+
+### **컴포넌트 문법**
+
+```JSX
+import { useState } from 'react';
+
+function App() {
+  return (
+    <div className="App">
+      <Modal></Modal>
+    </div>
+  );
+}
+
+function Modal() {
+  return(
+    <aside className="modal">
+      <h3>제목</h3>
+      <span>날짜</span>
+      <p>상세내용</p>
+    </aside>
+  );
+}
+```
+
+- **만드는 방법**
+
+1. function을 만들고 함수명 시작은 대문자로 한다.
+2. return() 안에 html을 담는다.
+3. <함수명></함수명> 사용한다.
+   </br>
+
+- **왜 사용하는가?**</br>
+  HTML에 div가 너무 많아지면 각각이 무슨 역할을 하는지 알아보기 힘들 때가 있다.</br>
+  그래서 컴포넌트를 사용하면 해당 태그가 무슨 역할을 하는지 바로 알 수 있다.
+
+- **언제 사용하면 좋은가**
+
+1. 반복적인 html을 축약할 때
+2. 페이지 전환할 때 컴포넌트로 사용하기
+3. 자주 변경되는 html UI
+   </br>
+   </br>
+
+### **이미지 넣기**
+
+```JSX
+import img from './assets/event.png';
+
+function App() {
+  return (
+    <div className="App">
+      <img src={img} alt="The event image"/>
+    </div>
+  );
+}
+```
+
+- **import <사용할 이름> from <이미지 파일 경로>;** 이렇게 사용하면 된다.
+  </br>
+  </br>
+
+### **조건식 사용하기**
+
+```JSX
+
+function App() {
+  let [modal, setModal] = useState(false);
+
+  return (
+    <div className="App">
+      {
+        // modal이 true면 <Modal/>을 보여주고 아니면 null 반환.
+        // null은 비어있는 html용으로 자주 사용한다.
+        modal === true ? <Modal/> : null
+      }
+    </div>
+  );
+}
+
+function Modal() {
+  return(
+    <aside className="modal">
+      <h3>제목</h3>
+      <span>날짜</span>
+      <p>상세내용</p>
+    </aside>
+  );
+}
+```
+
+- JSX는 HTML을 작성하는 문법으로 자바스크립트 문법인 if문을 사용할 수 없어서 **삼항 연산자**를 대신 {} 안에 사용한다.
+  </br>
+  </br>
+
+### **동적인 UI 만들기**
+
+```JSX
+
+function App() {
+  let [modal, setModal] = useState(false);
+
+  return (
+    <div className="App">
+      <button type="button" onClick={() => {
+        if(modal) {
+          setModal(false);
+        } else {
+          setModal(true);
+        }
+      }}>
+      {
+        modal === true ? <Modal/> : null
+      }
+    </div>
+  );
+}
+
+function Modal() {
+  return(
+    <aside className="modal">
+      <h3>제목</h3>
+      <span>날짜</span>
+      <p>상세내용</p>
+    </aside>
+  );
+}
+```
+
+- 조건문을 사용해서 동적인 UI를 만들 수 있다.
   </br>
   </br>
