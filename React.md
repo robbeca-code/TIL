@@ -306,3 +306,45 @@ function Modal() {
 - 조건문을 사용해서 동적인 UI를 만들 수 있다.
   </br>
   </br>
+
+### **부모 state를 자식에게 전송하기**
+
+```JSX
+
+function App() {
+  let [title, setTitle] = useState(['가방','양말','신발']);
+  let [modal, setModal] = useState(false);
+
+  return (
+    <div className="App">
+      <button type="button" onClick={() => {
+        if(modal) {
+          setModal(false);
+        } else {
+          setModal(true);
+        }
+      }}>
+      {
+                              //작명 = {state이름}
+        modal === true ? <Modal title={title}/> : null
+      }
+    </div>
+  );
+}
+
+function Modal(props) {
+  return(
+    <aside className="modal">
+      {/* props.작명 */}
+      <h3>props.title</h3>
+      <span>날짜</span>
+      <p>상세내용</p>
+    </aside>
+  );
+}
+```
+
+- 다른 컴포넌트에 있는 state를 사용하고 싶을 때, 그게 부모라면 props로 받아올 수 있다.</br>
+  **무조건 부모에서 자식한테만 state를 전송할 수 있다.**
+  </br>
+  </br>
