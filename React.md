@@ -348,3 +348,37 @@ function Modal(props) {
   **무조건 부모에서 자식한테만 state를 전송할 수 있다.**
   </br>
   </br>
+
+### **class 문법**
+
+```JSX
+//부모 안에 작성했을 때 이렇게 props를 받아올 수 있다.
+<App title={title} />
+
+
+class App extends React.Component {
+  constructor(props) {
+    // 여기 안에 state를 작성하거나
+    // 부모로부터 props를 받아올 수 있다.
+    this.state = {
+      name: 'Banana',
+      color: 'Yellow'
+    };
+    super(props);
+  }
+  render() {
+    return(
+      <div>
+        <span>여기에 html을 작성한다.</span>
+        <span>{this.state.name}</span>
+        <span>{this.props.title}</span>
+      </div>
+    );
+  }
+}
+```
+
+- class 문법은 예전에 많이 사용했던 문법이다. 과거에 썼던 리액트 프로젝트들엔 이런 문법이 많기 때문에 많이 봐두는게 좋다.</br>
+  class 문법에서 꼭 들어가야 할 것들은 **constructor(), super(), render()**이다.</br>
+  </br>
+  </br>
