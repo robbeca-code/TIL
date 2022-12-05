@@ -381,4 +381,21 @@ class App extends React.Component {
 - class 문법은 예전에 많이 사용했던 문법이다. 과거에 썼던 리액트 프로젝트들엔 이런 문법이 많기 때문에 많이 봐두는게 좋다.</br>
   class 문법에서 꼭 들어가야 할 것들은 **constructor(), super(), render()**이다.</br>
   </br>
+
+### **public 폴더에 이미지 넣기**
+
+```JSX
+function App() {
+  return (
+    <div className="App">
+      <img
+        src={process.env.PUBLIC_URL + '/public-assets/logo.png'}
+        alt="The logo image"/>
+    </div>
+  );
+}
+```
+
+- **public에 이미지 폴더 넣을 때**는 대부분 이미지 개수가 너무 많을 때 사용한다.</br>
+  process.env.PUBLIC_URL 을 권장하지만 이거 없이 사용해도 이미지는 나온다.
   </br>
