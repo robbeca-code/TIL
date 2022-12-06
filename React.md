@@ -399,3 +399,35 @@ function App() {
 - **public에 이미지 폴더 넣을 때**는 대부분 이미지 개수가 너무 많을 때 사용한다.</br>
   process.env.PUBLIC_URL 을 권장하지만 이거 없이 사용해도 이미지는 나온다.
   </br>
+  </br>
+
+### **다른 js 파일에 있는 데이터를 사용하고 싶을 때**
+
+```JSX
+/*     data1.js     */
+let a = 10;
+
+export default a;
+// export default 변수명; 이렇게 하면 다른 파일에서 데이터를 가져가서 사용할 수 있다.
+
+
+/*     data2.js     */
+let num1 = 10;
+let num2 = 20;
+
+export {num1, num2};
+
+
+/*     App.js     */
+import data from './data1';
+import {num1, num2} from './data2';
+// import 작명 from '경로';
+// import {여러개 할 때는 변수명 그대로 사용해야 한다} from '경로';
+```
+
+- **export를 사용하는 경우**
+
+1. 변수가 너무 길 때
+2. 함수를 나누어서 사용하고 싶을 때
+   </br>
+   </br>
