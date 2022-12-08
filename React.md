@@ -431,3 +431,37 @@ import {num1, num2} from './data2';
 2. 함수를 나누어서 사용하고 싶을 때
    </br>
    </br>
+
+### **react-router-dom 라이브러리 사용하기**
+
+```JSX
+import {Routes, Route, Link} from 'react-router-dom';
+
+function App() {
+  return(
+    <Link to="/">홈</Link>
+    <Link to="/detail">상세페이지</Link>
+
+    <Routes>
+      <Route path="/" element={<div>메인 페이지</div>} />
+      <Route path="/detail" element={<div>상세 페이지</div>} />
+    </Routes>
+
+    /*
+      Route를 하나의 링크라고 생각하면 된다.
+      path는 경로명으로 이것을 URL 창에 입력하면 element가 브라우저에 보여지게 된다.
+      **이때 path="/"는 메인 페이지를 의미한다.**
+    */
+  );
+}
+```
+
+- **라우터를 사용하는 방법**
+
+1. 터미널에 `npm install react-router-dom@6`을 입력해서 다운받는다. (@6은 6버전을 의미한다.)
+2. **index.js** 파일에서 import {BrowserRouter} from "react-router-dom"; 을 입력한 후,</br>
+   `<React.StrictMode>` 안에 있던 것들을 `<BrowserRouter>`으로 묶어준다.
+3. 라우터를 사용할 파일에는 import {Routes, Route, Link} from 'react-router-dom';을 입력하고 </br>
+   위의 코드처럼 사용한다.
+   </br>
+   </br>
