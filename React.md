@@ -465,3 +465,93 @@ function App() {
    위의 코드처럼 사용한다.
    </br>
    </br>
+
+### **라우터에서 가장 많이 쓰이는 것들**
+
+```JSX
+// 1. useNavagate 사용하기
+import { Link, useNavigate } from 'react-router-dom';
+
+function App() {
+  return(
+    let navigate = useNavigate();
+
+    <Link to="/detail">Detail</Link>
+    <button type="button" onClick={() => { useNavigate('/detail')}}>Detail</button>
+    /*
+      Link 태그를 사용하면 html에 <a> 로 보여지게 된다.
+      만약 <a>태그 말고 다른 태그로 사용하고 싶은데 페이지 이동을 하고 싶을 때,
+      useNavigate()를 사용하면 된다.
+    */
+  );
+}
+```
+
+- **useNavigate()**는 페이지 이동을 도와주는 훅이다.</br>
+  () 안에는 경로 뿐만 아니라 다른 값도 넣을 수 있다.</br>
+  **useNavigate(-1)**은 뒤로 1번 이동을 의미하고 **useNavigate(1)**은 앞으로 1번 이동을 의미한다.
+  </br>
+  </br>
+
+```JSX
+// 2. 404 페이지 만들기
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+
+function App() {
+  return(
+    <Routes>
+      <Route path="/detail" element={<div>상세 페이지 입니다.</div>} />
+      <Route path="*" element={<div>없는 페이지 입니다.</div>} />
+    </Routes>
+    /*
+      /detail 을 제외한 다른 경로들은 없는 경로이기 때문에
+      path="*"를 줘서 /detail 을 제외한 모든 경로는 없는 페이지(404 페이지)가 보이도록 할 수 있다.
+    */
+  );
+}
+```
+
+</br>
+</br>
+
+```JSX
+// 3. Nested Routes과 Outlet 사용하기
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+
+function App() {
+  return(
+    <Routes>
+      <Route path="/detail" element={<Detail />} />
+      <Route path="/detail/review" element={<div>상세 페이지의 리뷰 페이지 입니다.</div>} />
+      <Route path="/detail/ask" element={<div>상세 페이지의 질문 페이지 입니다.</div>} />
+
+
+      <Route path="/detail" element={<Detail />}>
+        <Route path="/review" element={<div>상세 페이지의 리뷰 페이지 입니다.</div>} />
+        <Route path="/ask" element={<div>상세 페이지의 질문 페이지 입니다.</div>} />
+      </Route>
+    </Routes>
+    /*
+      하위 메뉴에서 또 다른 하위 메뉴로 이동하고 싶을 땐, <Route> 안에 <Route>를 작성해주면 된다.
+    */
+  );
+}
+
+function Detail() {
+  return(
+    <div>상세 페이지 입니다.</div>
+    <Outlet></Outlet>
+    // 이 부분에 하위 메뉴가 위치해서 보여지게 된다.
+  );
+}
+```
+
+- **Nested Route의 장점**
+
+1. 하위 메뉴와 그것의 하위 메뉴 둘 다 브라우저에서 보여줄 수 있다. (이때 사용하는게 Outlet 이다.)
+2. 코드 가독성이 좋아진다.
+
+- **Nested Route를 사용하는 경우**
+
+1. 여러 페이지를 이동할 때
+2. 여러 유사한 페이지가 필요할 때(박스 1개만 바뀌면 되거나 글자 몇 개만 바뀌면 될 때)
