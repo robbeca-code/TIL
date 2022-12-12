@@ -477,7 +477,7 @@ function App() {
     let navigate = useNavigate();
 
     <Link to="/detail">Detail</Link>
-    <button type="button" onClick={() => { useNavigate('/detail')}}>Detail</button>
+    <button type="button" onClick={useNavigate('/detail')}>Detail</button>
     /*
       Link 태그를 사용하면 html에 <a> 로 보여지게 된다.
       만약 <a>태그 말고 다른 태그로 사용하고 싶은데 페이지 이동을 하고 싶을 때,
@@ -487,9 +487,9 @@ function App() {
 }
 ```
 
-- **useNavigate()**는 페이지 이동을 도와주는 훅이다.</br>
+- **useNavigate()** 는 페이지 이동을 도와주는 훅이다.</br>
   () 안에는 경로 뿐만 아니라 다른 값도 넣을 수 있다.</br>
-  **useNavigate(-1)**은 뒤로 1번 이동을 의미하고 **useNavigate(1)**은 앞으로 1번 이동을 의미한다.
+  **useNavigate(-1)** 은 뒤로 1번 이동을 의미하고 **useNavigate(1)**은 앞으로 1번 이동을 의미한다.
   </br>
   </br>
 
@@ -555,3 +555,60 @@ function Detail() {
 
 1. 여러 페이지를 이동할 때
 2. 여러 유사한 페이지가 필요할 때(박스 1개만 바뀌면 되거나 글자 몇 개만 바뀌면 될 때)
+   </br>
+   </br>
+
+### **:URL 파라미터로 페이지 여러 개 만들기**
+
+```JSX
+function App() {
+  return(
+    /*
+      :URL은 상품의 상세 페이지를 만들 때 자주 사용하는 것이다.
+      그래서 컴포넌트에 props만 다르게 주고 Page를 만들면 된다.
+    */
+    <Routes>
+      <Route path="/detail/:id" element={<Shoes data1={data1} />}/>
+      <Route path="/detail/:id" element={<Shoes data2={data2} />}/>
+      <Route path="/detail/:id" element={<Shoes data3={data3} />}/>
+      <Route path="/detail/:id" element={<Shoes data4={data4} />}/>
+      <Route path="/detail/:id" element={<Shoes data5={data5} />}/>
+    </Routes>
+  );
+}
+```
+
+- **:URL 파라미터를 사용하는 경우**
+
+1. 한 페이지에서 내용만 달라지고 비슷한 의미를 전달하는 페이지가 여러 개 일때
+2. 페이지가 너무 많을 때
+   </br></br>
+
+- **어떻게 작동하는가?**
+
+1. /detail/[ 아무거나 ] URL에는 이렇게 ([]는 자리를 표시한 것 뿐이다.) [] 자리에 아무 값이나 오게 된다.</br>
+   그래서 굳이 /detail/1 /detail/2 할 필요없이 /detail/:id 를 하면 편리하게 여러 개의 페이지를 만들 수 있다.
+   </br>
+   </br>
+
+### **useParams()로 사용자가 입력한 URL 값 가져오기**
+
+```JSX
+import { useParams } from 'react-router-dom';
+
+function User(props) {
+  let {id} = useParams();
+
+  <div>
+    <header>
+      <h1>{props.title[id]}</h1>
+    </header>
+    <div>
+      <span>{props.description[id]}</span>
+      <span>{props.price[id]}</span>
+    </div>
+  </div>
+}
+```
+
+- **useParams()를 사용하면** 상세 페이지를 만들 때, URL에 입력된 값에 맞게 내용을 보여줄 수 있게 된다.
