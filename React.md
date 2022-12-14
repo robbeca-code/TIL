@@ -612,3 +612,64 @@ function User(props) {
 ```
 
 - **useParams()를 사용하면** 상세 페이지를 만들 때, URL에 입력된 값에 맞게 내용을 보여줄 수 있게 된다.
+  </br>
+  </br>
+
+### **styled-components 사용하기**
+
+```JSX
+import styled from 'styled-components';
+
+let YellowBtn = styled.button`
+  background : yellow;
+  color: black;
+  padding: 10px;
+`;
+
+// 1. 비슷한 스타일은 props를 사용한다.
+// 2. 조건문도 사용할 수 있다.
+let ColorBtn = styled.button`
+  background: ${props => props.bg};
+  color: ${props => props.bg=='blue' ? 'white' : 'black'};
+  padding: 10px
+`;
+
+let Box = styled.div`
+  background: grey;
+  padding: 20px;
+`;
+
+function App() {
+  return(
+    <div>
+      <YellowBtn>노랑색 버튼</YellowBtn>
+
+      <ColorBtn bg="blue">파랑색 버튼</ColorBtn>
+      <ColorBtn bg="orange">주황색 버튼</ColorBtn>
+
+      <div>검정색 바탕 박스</div>
+    </div>
+
+  );
+}
+```
+
+- **styled-components 사용방법**
+
+1. 터미널에 `npm install styled-components` 를 입력한다.
+2. 위 코드처럼 작성하면 된다.
+   </br>
+   </br>
+
+- **styled-components의 장점**
+
+1. CSS 파일을 생성하지 않아도 된다.
+2. 스타일이 다른 js파일과 충돌되지 않는다.
+3. `<style>` 태그로 만들어져서 페이지 로딩 시간이 단축된다.
+   </br>
+   </br>
+
+- **styled-components의 단점**
+
+1. JS 파일이 매우 복잡해진다.
+2. 협업할 때 이 코드를 보고 이해를 못하는 사람이 있을 수 있다.
