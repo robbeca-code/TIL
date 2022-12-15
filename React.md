@@ -673,3 +673,67 @@ function App() {
 
 1. JS 파일이 매우 복잡해진다.
 2. 협업할 때 이 코드를 보고 이해를 못하는 사람이 있을 수 있다.
+   </br>
+   </br>
+
+### **컴포넌트의 Lifecycle**
+
+```JSX
+import { useEffect, useState } from 'react';
+
+function App() {
+  let [btn, setBtn] = useState(true);
+
+  useEffect(() => {
+    let timeout = setTimeout(() => {
+      setSwitch(false);
+    }, 2000);
+
+    return()=>{
+      // clean up function 이라는 별명을 가졌고,
+      // 기존에 있던 코드를 다 삭제해서 버그가 일어나지 않게 방지해주는 역할을 한다.
+
+      // 1. 기존에 있던 timeout이라는 타이머를 제거해주세요~
+      cleanTimeout(timeout);
+    }
+  });
+
+  return(
+    <div>
+      {
+        btn === true
+        ? <button type="button">
+            switch가 true일 때만 태그가 보이도록 하기.
+          </button>
+        : null
+      }
+    </div>
+  );
+}
+```
+
+- 컴포넌트의 **Lifecycle에는 3가지가** 있다.
+
+1. mount(페이지에 장착 된 경우)
+2. update(업데이트 된 경우)
+3. unomount(필요없어서 삭제 된 경우)
+   </br></br>
+
+- **useEffect()** 를 사용할 때
+
+1. 페이지가 **재랜더링** 될 때마다 코드를 실행하고 싶을 때
+   </br></br>
+
+- **useEffect() 안에 쓸 코드 종류**
+
+1. 어려운 연산 (중첩 for문 등..)
+2. 서버에서 데이터 가져오는 작업
+3. 타이머 장착하는 거(setTimeout 등..)
+   </br></br>
+
+- **useEffect() 종류 3가지**
+
+1. `useEffect(() => {})` 재랜더링 될 때마다 실행
+2. `useEffect(() => {}, [])` mount시 1회 코드를 실행하고 싶을 때
+3. `useEffect(() => { return()=>{} }, [])` unmount시 1회 코드를 실행하고 싶을 때
+4. `useEffect(() => {}, [change])` change 라는 state가 변경될 때마다 코드를 실행하고 싶을 때
