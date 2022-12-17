@@ -751,7 +751,7 @@ function App() {
    ex) 서버 개발자에게 물어보면 된다.
    </br></br>
 
-- 이제 진짜 **ajax** 사용하기
+- 이제 진짜 **ajax 사용하기**
 
 1. `npm install axios` 를 터미널에 입력한다.
 2. `import axios from 'axios';` 라고 코드를 입력한다.
@@ -764,6 +764,7 @@ function App() {
 import axios from 'axios';
 
 function Detail() {
+
   // then 안에 들어있는 데이터에는 내가 찾아온 데이터가 들어있다.
   return(
     <button type="button" onClick={() => {
@@ -778,6 +779,58 @@ function Detail() {
     >
       더보기
     </button>
+  );
+}
+```
+
+- 이번엔 **ajax 활용하기** </br>
+  `ajax로 데이터를 받아와서 버튼을 누르면 화면에 보이는 실습하기`
+
+```JSX
+import axios from 'axios';
+import {useState} from 'react';
+
+function Detail() {
+
+  //버튼을 클릭했을 때만 보여주기 위해서 onClick state를 만들었다.
+  let [onClick, setOnClick] = useState(true);
+
+  let [products, setProducts] = useState([]);
+
+  return(
+    <div>
+      <button type="button" onClick={() => {
+        axios.get('https://codingapple1.github.io/shop/data2.json')
+        .then((result) => {
+          if(onClick) {
+            setOnClick(false);
+            setProducts([]);
+          } else {
+            setOnClick(true);
+            setProduct([...result.data]);
+          }
+        })
+        .catch(() => {
+          alert('데이터가 없습니다.');
+        })
+      }}>
+        더보기
+      </button>
+
+      <div>
+      {
+        products.map((item) => {
+          return(
+            <article>
+              <h1>{item.title}</h1>
+              <span>{item.price}</span>
+              <p>{item.content}</p>
+            </article>
+          );
+        })
+      }
+      </div>
+    </div>
   );
 }
 ```
