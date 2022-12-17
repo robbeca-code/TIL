@@ -737,3 +737,47 @@ function App() {
 2. `useEffect(() => {}, [])` mount시 1회 코드를 실행하고 싶을 때
 3. `useEffect(() => { return()=>{} }, [])` unmount시 1회 코드를 실행하고 싶을 때
 4. `useEffect(() => {}, [change])` change 라는 state가 변경될 때마다 코드를 실행하고 싶을 때
+   </br>
+   </br>
+
+### **AJAX로 서버에서 데이터 받아오기**
+
+- 서버에서 데이터를 가져오려면 **단계**가 있다. </br>
+  ex) 네이버에서 웹툰을 불러와보자.
+
+1. 어떤 방법으로 데이터를 보낼 것인지 **(GET / POST)** </br>
+   ex) comic.naver.com (GET 요청)
+2. 어떤 자료를 가져와달라고 할 것인지 **(URL 형식)** </br>
+   ex) 서버 개발자에게 물어보면 된다.
+   </br></br>
+
+- 이제 진짜 **ajax** 사용하기
+
+1. `npm install axios` 를 터미널에 입력한다.
+2. `import axios from 'axios';` 라고 코드를 입력한다.
+3. `axios.get()`은 **GET 요청**으로 데이터를 보내는 것을 의미한다.
+4. () 안에는 서버 개발자가 만든 **URL**을 입력하면 된다.
+5. 최종 코드는 `axios.get('url').then()`이다.
+   </br></br>
+
+```JSX
+import axios from 'axios';
+
+function Detail() {
+  // then 안에 들어있는 데이터에는 내가 찾아온 데이터가 들어있다.
+  return(
+    <button type="button" onClick={() => {
+      axios.get('https://codingapple1.github.io/shop/data2.json')
+      .then((result) => {
+        console.log(result);
+      })
+      .catch(() => {
+        console.log('실패했을 때 실행될 함수');
+      })
+      }}
+    >
+      더보기
+    </button>
+  );
+}
+```
