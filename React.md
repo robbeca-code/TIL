@@ -834,3 +834,86 @@ function Detail() {
   );
 }
 ```
+
+</br>
+</br>
+
+### **IF 조건문으로 탭 만들기**
+
+```JSX
+import { useState } from 'react';
+
+function App() {
+  let [tab, setTab] = useState(0);
+
+  return(
+    <div>
+      <div>
+        <button type="button" onClick={() => { setTab(0); }}>
+          탭1
+        </button>
+        <button type="button" onClick={() => { setTab(1); }}>
+          탭2
+        </button>
+        <button type="button" onClick={() => { setTab(2); }}>
+          탭3
+        </button>
+      </div>
+
+      {/
+        변경된 tab 값을 전달해서 조건문에 맞는 컴포넌트가 보여지게 된다.
+      /}
+      <TabContent tab={tab} />
+    </div>
+  );
+}
+
+function TabContent(props) {
+  let tab = props.tab;
+
+  if(tab === 0) {
+    return(
+      <div>
+        <span>탭1 버튼을 눌렀을 때 나오는 창입니다.</span>
+      </div>
+    );
+  }
+  if(tab === 1) {
+    return(
+      <div>
+        <span>탭2 버튼을 눌렀을 때 나오는 창입니다.</span>
+      </div>
+    );
+  }
+  if(tab === 2) {
+    return(
+      <div>
+        <span>탭3 버튼을 눌렀을 때 나오는 창입니다.</span>
+      </div>
+    );
+  }
+}
+```
+
+- **조건문 컴포넌트 사용하는 이유**</br>
+  HTML 안에 `삼항 연산자`를 사용할 수 있지만 {} 안에 1개만 사용할 수 있어 코드가 복잡해진다.</br>
+  따라서 `조건문 컴포넌트`를 사용하면 코드의 가독성이 좋아진다.
+  </br></br>
+
+```JSX
+//조건문 컴포넌트 내용을 이렇게 바꿔쓸 수도 있다.
+
+function TabContent({tab}) {
+
+  /*
+    tab이 0이면 내용1이 출력된다.
+    이렇게 조건문을 사용하지 않아도 된다.
+  */
+  return(
+    [<div>내용1</div>, <div>내용2</div>, <div>내용3</div>][tab]
+  );
+}
+```
+
+- `props.tab` 이렇게 사용하고싶지 않을 때 위 코드처럼 변수를 {}로 감싸면 `props.`을 붙이지 않고 변수명만 쓸 수 있다.</br>
+  (여러 개면 `{변수1, 변수2, ...}` 이렇게 작성하면 된다.)
