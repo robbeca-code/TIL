@@ -124,3 +124,29 @@ div {
 - absolute는 부모에 position 태그가 없으면 상위 태그 위치에 따른다.</br>그래서 부모 태그에 position을 주고 자식 태그에 top, left 위치 속성을 주면 부모 태그 크기에 따라 배치된다.
   </br>
   </br>
+
+### **transition 사용하기**
+
+```css
+/*  style.css  */
+
+/* 애니메이션 전 동작 */
+.start {
+  opacity: 0;
+}
+
+.end {
+  opacity: 1;
+  transition: opacity 0.5s; /* opacity가 변경될 때 0.5초에 걸쳐서 변경해주세요 */
+}
+```
+
+- **transition 문법**</br>
+  `transition: 스타일명 시간;` -> **스타일명이 변경**될 때 시간만큼 걸쳐서 변경해준다.
+
+- **transition(전환애니메이션) 사용방법**
+
+1. 애니메이션 동작 전 style 만들기
+2. 애니메이션 동작 후 style 만들기
+3. style에 transition 주기
+4. 원할 때 2번 style 부착하기
