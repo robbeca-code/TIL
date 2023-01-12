@@ -917,3 +917,112 @@ function TabContent({tab}) {
 
 - `props.tab` 이렇게 사용하고싶지 않을 때 위 코드처럼 변수를 {}로 감싸면 `props.`을 붙이지 않고 변수명만 쓸 수 있다.</br>
   (여러 개면 `{변수1, 변수2, ...}` 이렇게 작성하면 된다.)
+  </br>
+  </br>
+
+### **Redux Toolkit 사용하기**
+
+```jsx
+import { configureStore, createSlice } from "@reduxjs/toolkit";
+
+//useState와 비슷한 역할
+let user = createSlice({
+  name: "user",
+  initialState: "Kim"
+
+  reducers: {
+    // 인자도 넣을 수 있다.
+    state수정함수(state){
+      return '변경하고 싶은 값' + state
+    }
+
+    changeName(state){
+      return 'Lee' + state
+    }
+  }
+});
+
+export let { changeName } = user.actions;
+
+let stock = createSlice({
+  name: "stock",
+  initialState: [10, 11, 12]
+});
+
+let login = createSlice({
+  name: 'login',
+  initialState: {email: '', pass: '', nickname: ''},
+
+  //input은 changeLogin(인자)에 들어오는 값을 의미한다.
+  changeLogin(state, input) {
+    return state.nickname = input;
+  }
+});
+
+export { changeLogin } = login.actions;
+
+export default configureStore({
+  reducer: {
+    user: user.reducer,
+    stock: stock.reducer,
+  },
+});
+```
+
+- **Redux Toolkit 장점**</br>
+  컴포넌트 간에 state 공유가 편해집니다.
+
+- **Redux Toolkit 사용방법**
+
+1. 터미널에서 `npm install @reduxjs/toolkit react-redux` 를 입력한다.
+2. state를 보관할 파일을 생성한다.
+3. **index.js에서** <Provider store={store}>로 요소들을 다 깜싼다.
+   (store={store}는 내가 생성한 redux 파일 명을 쓰면 된다!)
+
+---
+
+4. 위에 처럼 redux 페이지를 저렇게 작성한다.
+5. **createSlice는** state를 생성하고 수정하는(reducers) 함수도 생성한다, **reducer에는** state를 등록해야 하는 곳이다. (reducer에 등록해야 다른 컴포넌트에서 사용이 가능하다.)
+6. reducers에 생성한 함수는 반드시 `export` 해야 한다.
+   </br>
+   </br>
+
+### Redux 생성한 state 사용하기
+
+```jsx
+// detail.js 코드이다.
+import { useSelector } from "react-redux";
+import { changeName } from './../store.js';
+
+function Detail() {
+  // 저장된 state가 담겨져있다.
+  let state = useSelector((state) => {
+    return state;
+  });
+
+  // user만 가져올 수 있다.
+  let user = useSelector((state) => {
+    return state.user;
+  });
+
+  // redux 파일에 요청을 보내는 함수이다.
+  let dispatch = useDispatch();
+
+  return {
+    <div>
+      <span>{user}</span>
+      <button onClick={() => {
+        dispatch(changeName())
+      }}>
+      </button>
+      <h1>{state.login}</h1>
+      <input type="text" onChange={() => {dispatch(changeLogin(e.target.value))} } />
+    </div>
+  };
+}
+```
+
+- **redux 다른 컴포넌트에서 사용하기**
+
+1. useSelector를 사용해서 state를 가져온다.
+2. 함수를 가져올 때는 import하고, `dispatch 변수를 생성`해야 한다.
