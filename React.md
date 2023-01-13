@@ -991,7 +991,7 @@ export default configureStore({
 
 ```jsx
 // detail.js 코드이다.
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changeName } from './../store.js';
 
 function Detail() {
