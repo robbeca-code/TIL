@@ -1,5 +1,91 @@
 # [JavaScript](README.md)
 
+### **태그 안에 script 태그 사용하기**
+
+```html
+<!--#1. <head> 태그 안에 <script>를 넣었을 때 동작순서-->
+<head>
+  <title>head 태그 안에 script 넣기</title>
+  <script src="main.js"></script>
+</head>
+<body></body>
+```
+
+1. html을 위에서부터 1줄씩 parsing 한다.
+2. script 태그를 만나면 html의 parsing을 멈추고 다운받는다.
+3. 다운을 다 받은 뒤 다시 parsing을 한다.
+
+- **단점**
+  - html의 규모가 클 수 록 속도가 오래 걸린다.
+    </br></br>
+
+```html
+<!--#1. <body> 태그 안에 <script>를 넣었을 때 동작순서-->
+<head>
+  <title>body 태그 안에 script 넣기</title>
+</head>
+<body>
+  <script src="main.js"></script>
+</body>
+```
+
+1. html을 위에서부터 1줄씩 parsing 한다.
+2. html을 다 parsing한 후
+3. 페이지가 준비가 되면 script를 다운받는다.
+
+- **단점**
+  - script가 다운이 될 때까지 동작이 안된다.
+    </br>
+    </br>
+
+### **JS async와 defer의 차이점**
+
+```html
+<!--#1. <head> 태그 안에 <script asyn>를 넣었을 때 동작순서-->
+
+<head>
+  <title>body 태그 안에 script 넣기</title>
+  <script asyn src="main.js"></script>
+  <!--asyn는 Boolean으로 선언만으로 true가 된다.-->
+</head>
+<body></body>
+```
+
+1. html은 위에서 아래로 1줄씩 parsing 하다가
+2. asyn을 만나면 병렬로 script를 다운받는다.
+3. 다운을 다 받으면 html의 parsing을 멈추고 script를 실행한다.
+4. 실행이 끝나면 다시 html을 다운 받는다.
+
+- **장점**
+  - head에 넣어서 병렬적으로 동작해서 srcipt 다운받는 속도를 줄일 수 있다.
+- **단점**
+  - script를 실행할 때 html의 parsing을 멈추기 때문에 여전히 html parsing 속도는 느리다.
+  - 먼저 다운 받아진 script를 먼저 실행한다.(`만약 순서에 의존하는 script라면 문제가 발생함.`)
+    </br>
+    </br>
+
+```html
+<!--#1. <head> 태그 안에 <script defer>를 넣었을 때 동작순서-->
+
+<head>
+  <title>body 태그 안에 script 넣기</title>
+  <script defer src="main.js"></script>
+  <!--defer는 Boolean으로 선언만으로 true가 된다.-->
+</head>
+<body></body>
+```
+
+1. html은 위에서 아래로 1줄씩 parsing 하다가
+2. defer을 만나면 병렬로 script를 다운받는다.
+3. html의 parsing이 끝나면 그 뒤에 script를 실행한다.
+
+- **장점**
+  - head에 넣어서 병렬적으로 동작해서 srcipt 다운받는 속도를 줄일 수 있다.
+  - sciprt 다운받는 속도와 상관없이 순서대로 실행된다.
+  - html의 parsing이 다 끝난 후에 script를 실행해서 html parsing하는데 속도가 다른 것들보다 빠르다.
+    </br>
+    </br>
+
 ### **input 태그 연결하기**
 
 ```js
@@ -142,5 +228,34 @@ let spliceMark = mark.splice(0, 3);
 
 1. 처음 위치에서 몇 개까지를 지울 것인지 역할을 수행한다.
 2. 원본 배열에 영향을 미친다.
+   </br>
+   </br>
+
+### **클로저**
+
+```js
+let outer = function () {
+  let a = 5;
+  let inner = function () {
+    // 외부에 있는 변수를 사용함 -> 클로저
+    return ++a;
+  };
+
+  return inner;
+};
+
+let outer2 = outer();
+console.log(outer2()); //6
+console.log(outer2()); //7
+
+//더이상 사용을 하지 않는다면 클로저 함수 종료해야 한다
+outer = null;
+```
+
+- **클로저의 특징**
+
+1. 어떤 함수에서 선언한 변수를 내부 함수를 외부로 전달했을 때, 실행 컨텍스트가 종료되어도 해당 변수가 사라지지 않는 현상을 말한다.
+
+2. 메모리를 계속 차지하기 때문에 더 사용하지 않는 클로저는 종료시킬 필요가 있다.
    </br>
    </br>
