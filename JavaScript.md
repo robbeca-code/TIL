@@ -259,3 +259,155 @@ outer = null;
 2. 메모리를 계속 차지하기 때문에 더 사용하지 않는 클로저는 종료시킬 필요가 있다.
    </br>
    </br>
+
+### **배열 초기화하기**
+
+```js
+let reset;
+(reset = []).length = 4;
+reset.fill(false); //[false, false, false, false]
+
+// 어떤 배열의 길이를 복사하고 싶을 때
+let arr = ["a", "b", "c", "d", "x", "z"];
+
+(reset = []).length = mark.length;
+reset.fill(""); // ['', '', '', '', '', ''];
+```
+
+- **for이나 new Array()를 사용하지 않은 이유**
+  - new Array(N)은 속도가 느리기 때문이다.
+  - for문보다 훨씬 코드가 간결하고 이해하기 쉽기 때문이다.
+    </br>
+    </br>
+
+### **클래스의 getter/setter**
+
+```js
+class Person {
+  constructor(name, age) {
+    // this는 인스턴스를 가리킨다. (인스턴스 => kim)
+    this.name = name;
+    this.age = age;
+  }
+
+  get age() {
+    return this._age;
+  }
+
+  set age(value) {
+    this._age = value;
+  }
+}
+
+const kim = new Person("Kim Yong", 34);
+```
+
+- **getter/setter 사용하는 이유**
+
+  - 값을 가져오거나 저장할 때 개발자가 아닌 다른 사용자가 임의로 수정하면 오류가 발생할 수 있기 때문이다.
+    </br></br>
+
+- **getter/setter에서 필드 명을 다르게 하는 이유**
+  1. **필드명이 같으면** 생성자(constructor)에서 필드가 `매모리에 있는 값을 저장하지 않고, getter을 호출한다.`
+  2. **= value** 일 때는 메모리에 있는 값을 가져오지 않고 setter을 호출한다.
+  3. 이것이 계속 반복되면 `Maximum call stack size exceeded.` 라는 오류가 발생한다.
+  4. 필드명이 다르면 이런 오류는 발생하지 않는다.
+     </br>
+     </br>
+
+### **JS의 public과 private**
+
+```js
+class Num {
+  publicNum = 123;
+  #privateNum = 567;
+}
+
+const num1 = new Num();
+
+console.log(num1.publicNum); // 123
+console.log(num1.privateNum); // undefined
+```
+
+- **public과 private 특징**
+  1. 생성자 없이 해당 변수를 선언할 때 사용한다.
+  2. public 변수는 변수 앞에 아무것도 없고, 내부 및 외부에서도 접근이 가능하다.
+  3. private 변수는 변수 앞에 **#** 가 있고, 클래스 내부에서만 접근이 가능하다.
+  4. private를 호출했다고 오류는 발생하지 않고, undefined을 반환한다.
+     </br>
+     </br>
+
+### **JS의 extends**
+
+```js
+class Shape {
+  constructor(width, height) {
+    this.width = width;
+    this.height = height;
+  }
+
+  getArea() {
+    return width * height;
+  }
+}
+
+class Rectangle extends Shape {}
+class Triangle extends Shape {
+  getArea() {
+    return (width * height) / 2;
+  }
+}
+
+const rectangle = new Rectangle(20, 20);
+const triangle = new Triangle(10, 6);
+console.log(rectangle.getArea()); // 40
+console.log(triangle.getArea()); // 30
+```
+
+- **상속(extends)의 사용 이유**
+
+  - 클래스들 끼리 중복되는 부분을 하나의 클래스로 저장하고 상속을 하면,
+
+  1. 유지보수가 쉬워진다.
+  2. 중복되는 코드를 줄여서 가독성을 높인다.
+  3. 다양한 표현이 가능해진다. `(ex: getArea()를 Triangle에 맞게 수정한 것처럼)`
+     </br>
+     </br>
+
+### **JS의 instanceof**
+
+```js
+class Shape {
+  constructor(width, height) {
+    this.width = width;
+    this.height = height;
+  }
+
+  getArea() {
+    return width * height;
+  }
+}
+
+class Rectangle extends Shape {}
+class Triangle extends Shape {
+  getArea() {
+    return (width * height) / 2;
+  }
+}
+
+console.log(Triangle instanceof Shape); //T
+console.log(Triangle instanceof Rectangle); //F
+console.log(triangle instanceof Triangle); //T
+console.log(Triangle instanceof Object); //T
+```
+
+- **instanceof 사용방법**
+
+  - `A instanceof B`
+  - A와 B가 동일한가? 라는 의미이다.
+  - 부모와 자식은 동일하다.
+  - 다른 클래스끼리는 동일하지 않다.
+  - JS의 모든 객체의 부모는 Object이다.
+
+  </br>
+  </br>
