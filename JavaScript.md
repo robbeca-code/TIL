@@ -411,3 +411,96 @@ console.log(Triangle instanceof Object); //T
 
   </br>
   </br>
+
+### **JS의 Object 생성**
+
+```js
+const user1 = { name: "coder", age: 32 };
+user1.hasJob = true;
+console.log(user1); // {name: 'coder', age: 32, hasJob: true}
+
+delete user.hasJob;
+console.log(user1); // {name: 'coder', age: 32}
+```
+
+- **Object 특징**
+  1. key와 value로 이루어진 집합체 이다.
+  2. Object가 생성된 뒤 새로운 key와 value를 넣거나 삭제할 수 있다.
+  3. JS가 `Dynamic Type Language`라서 동적으로 타입이 Runtime 후에 결정되기 때문에 가능하다.
+     </br>
+     </br>
+
+### **JS의 Object 호출하기**
+
+```js
+const user1 = { name: "coder", age: 32 };
+
+// . 사용하기
+console.log(user1.name);
+
+// [] 사용하기
+console.log(user1["name"]);
+
+function printValue(obj, key) {
+  // . 으로 하면 obj 안에 key라는 프로퍼티 값을 출력해줘 라는 의미가 된다.
+  // console.log(obj.key);
+
+  // []를 사용해야 정상적으로 작동한다.
+  console.log(obj[key]);
+}
+```
+
+- **Object 호출문 차이점**
+  1. 대부분의 경우 .(점)을 사용하지만
+  2. 위와 같이 key를 인자로 받아서 해당 프로퍼티 값을 출력하는 함수에는 `[]`를 사용해야 한다.
+     </br>
+     </br>
+
+### **JS의 Object 반복문으로 출력하기**
+
+```js
+const user1 = { name: "coder", age: 32 };
+
+for (key in user1) {
+  console.log(key); // name age
+}
+
+for (value of user1) {
+  console.log(value); // "coder" 32
+}
+```
+
+- **반복문 차이점**
+  1. for..in은 Object의 key를 반복적으로 출력해준다.
+  2. for..of는 Object의 value를 반복적으로 출력해준다.
+     </br>
+     </br>
+
+### **JS의 Object 복사하기**
+
+```js
+const user1 = { name: "coder", age: 32 };
+
+// 방법1
+const user2 = {};
+for (key in user1) {
+  user2[key] = user1[key];
+}
+
+// 방법2
+const user3 = {};
+Object.assign(user3, user1);
+```
+
+- **Object.assign 특징**
+
+  1. Object.assign(target, source) 기본적으로 이렇게 사용한다.
+  2. target에 source를 덮어씌워서 똑같은 Object를 복사하는 방법이다.
+  3. 이때 target에 source와 동일한 key가 있다면, `source 것으로 덮어진다`.
+     </br>
+     </br>
+
+- **Object.assign을 사용하는 이유**
+  - for문보다 간결해서 요즘 많이 사용한다.
+    </br>
+    </br>
