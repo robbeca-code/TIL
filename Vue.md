@@ -2,6 +2,36 @@
 
 ### **App.vue 구조 설명**
 
+```vue
+<template>
+  <div>
+    <img alt="Vue logo" src="./assets/logo.png" />
+    <HelloWorld msg="Welcome to Your Vue.js App" />
+</template>
+
+<script>
+import HelloWorld from "./components/HelloWorld.vue"
+
+export default {
+  name: "App",
+  components: {
+    HelloWorld
+  },
+};
+</script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -mox-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
+```
+
 1. &#60;template&#62; 태그
 
 - HTML을 사용하는 태그이다.
@@ -59,7 +89,7 @@ export default {
 
 ### **반복문**
 
-```
+```vue
 <template>
   <a v-for="v in menus" :key="v"> {{ v }}</a>
   <div v-for="(v, i) in titles" :key="i">
@@ -73,7 +103,7 @@ export default {
   name: "App",
   data() {
     return {
-      titles: ['갤럭시 S3 Ultra', '갤럭시 S3+'],
+      titles: ["갤럭시 S3 Ultra", "갤럭시 S3+"],
       price: [136, 130],
       menus: ["Home", "Shop", "About"],
     };
