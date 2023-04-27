@@ -1026,3 +1026,7 @@ function Detail() {
 
 1. useSelector를 사용해서 state를 가져온다.
 2. 함수를 가져올 때는 import하고, `dispatch 변수를 생성`해야 한다.
+
+- **useSelector 특징**
+
+1. 반환된 값이 마지막 값과 달라지지 않으면 재렌더링 하지 않는다.
