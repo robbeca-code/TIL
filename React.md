@@ -987,7 +987,7 @@ export default configureStore({
    </br>
    </br>
 
-### Redux 생성한 state 사용하기
+### **Redux 생성한 state 사용하기**
 
 ```jsx
 // detail.js 코드이다.
@@ -1030,3 +1030,85 @@ function Detail() {
 - **useSelector 특징**
 
 1. 반환된 값이 마지막 값과 달라지지 않으면 재렌더링 하지 않는다.
+   </br>
+   </br>
+
+### React 배포할 때 빈 페이지가 나올 때 해결하는 법
+
+```js
+// 파일명: index.js
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <App />
+  </BrowserRouter>
+);
+```
+
+- **BrowserRouter에 basename props 넣기**
+
+1. `process.env.PUBLIC_URL`의 의미는 .env 파일에서 PUBLIC_URL의 값을 가져온다는 것이다.
+2. basename이 root가 되어서 정상적이게 페이지가 동작한다.
+   </br>
+   </br>
+
+### React 배포할 때 이미지가 안 보일 때 해결하는 법
+
+- **src에 /리파지토리명/이미지경로 를 사용하기**
+
+1. `내아이디.github.io/리포지토리명/`으로 배포를 한 경우 이미지 경로 앞에 무조건 `/리파지토리명`을 써줘야 한다.
+   </br>
+   </br>
+
+### React 배포할 때 react to load resource: the server responded with a status of 404 () 오류 해결
+
+```json
+// 파일 이름: package.json
+{
+  "homepage": "https://robbeca-code.github.io/cook",
+  "proxy": "https://robbeca-code.github.io/cook",
+  "name": "cook",
+  ...
+}
+```
+
+- **proxy에 배포한 경로를 적어준다.**
+
+1. 프론트와 백엔드가 서로 연동이 안되어 있을 때 발생하는 오류이다.
+2. 해결하기 위해 `"proxy": "배포한_경로"`를 적어줘서 서로 연동되게 만든다.
+   </br>
+   </br>
+
+### DOM property `frameborder`. Did you mean `frameBorder`? 오류 해결
+
+```html
+<!-- 오류가 발생한 코드 -->
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/jC41T25dImI"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
+
+<!-- 오류를 해결한 코드 -->
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/jC41T25dImI"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
+```
+
+- **frameborder를 frameBorder로 변경한다.**
+
+1. JSX에선 frameBorder로 사용해야 한다.
+2. 비슷한 예로, JSX에선 태그에 클래스명을 사용할 때 `class`가 아닌 `className`을 사용해야 하는 것이 있다.
