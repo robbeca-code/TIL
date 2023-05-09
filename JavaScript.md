@@ -504,3 +504,23 @@ Object.assign(user3, user1);
   - for문보다 간결해서 요즘 많이 사용한다.
     </br>
     </br>
+
+### Uncaught SyntaxError: Illegal return statement 오류 해결하기
+
+```js
+// 오류가 발생한 코드
+if (filter != "구 선택" && keyword == "") {
+  return (list = resetList.filter((store) => store.code.includes(filter)));
+}
+
+// 오류를 해결한 코드
+const showContent = (filter, keyword) => {
+  if (filter != "구 선택" && keyword == "") {
+    return (list = resetList.filter((store) => store.code.includes(filter)));
+  }
+};
+```
+
+- **return문은 함수 블록 내에서만 사용할 수 있다.**
+
+1. 자바스크립트에선 함수가 아닌 블록 내에서 사용하면 오류가 발생한다.
