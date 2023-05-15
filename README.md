@@ -173,3 +173,15 @@
 #### props 사용해서 데이터 보내기
 
 #### 자식 컴포넌트에서 props 데이터 사용하기
+
+#### The template requires child element 오류 해결
+
+#### npm WARN EBADENGINE Unsupported engine 오류 해결
+
+#### vue2와 vue3의 &#60;script&#62;의 차이점
+
+#### vue2와 vue3에서 사용하는 API가 다르기 때문에 문법이 다르다.
+
+#### vue2와 vue3에서 자식 컴포너틑 사용 차이점
+
+#### vue2와 vue3에서 props 문법 차이점
