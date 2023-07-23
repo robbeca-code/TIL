@@ -98,3 +98,22 @@
   (상위 html로 퍼지는 이벤트 버블리을 막아주는 함수이다.)
   </br>
   </br>
+
+### **aria label**
+
+```html
+<img src="book.png" alt="책 제목" />
+<span role="region" aria-label="store's tel number">010-1234-5678</span>
+```
+
+- aria-label을 사용하는 이유
+
+  1. 시각장애인이 웹 등을 사용할 때 화면에 나와있는 정보를 음성으로 읽어주는 역할을 한다.
+  2. 프론트엔드 개발자라면 여러 사용자들이 사용할 수 있도록 해야 하는데 이 aria-label은 필수라고 생각한다.
+
+- span에서 `role을 사용한 이유`
+  1. span에서는 aria-label을 사용하기 위해선 `role`이란 것을 지정해줘야 한다.
+  2. role에는 `main, navigation, search 등`을 사용할 수 있다.
+  3. region은 웹에서 중요하다고 생각되는 정보에 사용해서 이게 어떤 정보를 나타내는지 aria-label과 같이 사용해야만 한다.
+     </br>
+     </br>

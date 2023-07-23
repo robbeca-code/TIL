@@ -504,3 +504,157 @@ const props = difineProps({
 
 1. vue2는 `props 옵션`에 전달받은 props의 데이터형을 입력한다.
 2. vue3는 `defineProps()`를 활용해서 전달받은 props의 데이터형을 입력한다. 여기서 반환된 객체는 JS에서 접근이 가능하다.
+   </br>
+   </br>
+
+### **vue에서 form 바인딩 하기**
+
+```js
+// vue2 버전일 때
+<script>
+export default {
+  data() {
+    return {
+      text: '',
+      selected: '구 선택'
+    }
+  }
+}
+</script>
+
+<template>
+  <div>
+    <h3>Text</h3>
+    <input v-model="text" />
+    <strong>{{ text }}</strong>
+
+    <h3>Select</h3>
+    <select v-model="selected">
+      <option disabled value="">구를 선택하세요</option>
+      <option>강남구</option>
+      <option>은평구</option>
+      <option>성동구</option>
+    </select>
+    <strong>Selected: {{ selected }}</strong>
+  </div>
+</template>
+
+
+// vue3 버전일 때
+<script setup>
+import {ref} from 'vue'
+
+const text = ref('')
+const selected = ref('구 선택')
+</script>
+
+<template>
+  <div>
+    <h3>Text</h3>
+    <input v-model="text" />
+    <strong>{{ text }}</strong>
+
+    <h3>Select</h3>
+    <select v-model="selected">
+      <option disabled value="">구를 선택하세요</option>
+      <option>강남구</option>
+      <option>은평구</option>
+      <option>성동구</option>
+    </select>
+    <strong>Selected: {{ selected }}</strong>
+  </div>
+</template>
+```
+
+- **vue2와 vue3에서 form 바인딩 차이점**
+
+1. &#60;script&#62;에서 변수를 선언하는 방법말고 동일하다.
+   </br>
+   </br>
+
+### **Vue에서 font awesome 사용하기**
+
+```html
+<!--파일명: ../public/index.html-->
+<script
+  src="https://kit.fontawesome.com/kit이름.js"
+  crossorigin="anonymous"
+></script>
+```
+
+```html
+<!-- 파일명: ../components/MainPage.vue -->
+<template>
+  <button type="button">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    검색
+  </button>
+</template>
+```
+
+1. **index.html에 kit 태그를 복사해서 붙여넣는다**
+
+- font awesome을 사용하기 위해서 해당 링크가 필요하기 때문이다.
+
+2. **사용하고싶은 컴포넌트 안에 아이콘 태그(&#60;i&#62;)를 넣는다.**
+
+- 이러면 해당 컴포넌트에는 붙여넣은 아이콘이 화면에 보여지게 된다.
+  </br>
+  </br>
+
+### **$emit을 활용해서 자식 컴포넌트에서 부모 컴포넌트로 값 전달하기**
+
+```html
+<!-- 자식 컴포넌트(ShowList.vue) -->
+<template>
+  <button type="button" class="link" @click="clickLinkBtn(store)">...</button>
+</template>
+<script>
+  export default {
+    emits: ["storeInfo"],
+
+    methods: {
+      clickLinkBtn(storeInfo) {
+        this.$emit("storeInfo", storeInfo);
+      },
+    },
+  };
+</script>
+
+<!-- 부모 컴포넌트(MainPage.vue) -->
+<template> <ShowList @storeInfo"getStoreInfo" /> </template>
+<script>
+  import ShowList from "../components/ShowList.vue";
+
+  export default {
+    components: {
+      ShowList,
+    },
+
+    data: () => ({
+      storeInfo: null,
+    }),
+
+    methods: {
+      getStoreInfo(storeInfo) {
+        this.storeInfo = storeInfo;
+      },
+    },
+  };
+</script>
+```
+
+1. **$emit을 활용하는 이유**
+
+- 컴포넌트는 내장 메서드 $emit을 활용해서 직접 사용자 정의 이벤트를 발신할 수 있다.
+- 주로 자식 컴포넌트에서 부모 컴포넌트로 데이터를 전송할 때 사용된다.
+
+2. **$emit 활용 방법**
+
+- 부모 컴포넌트에서 자식 컴포넌트에게 v-on을 사용하여 수신한다.
+  - `<ShowList @부모컴포넌트_emit명="메서드명" />`
+- 자식 컴포넌트에서 부모 컴포넌트로부터 받은 emits을 정의하고 값을 수신합니다.
+  - 정의하는 방법: `emits: ['부모 컴포넌트의 emit명', ...]`
+  - 데이터를 수신하는 방법: `this.$emit('부모_컴포넌트의_emit', 데이터)`
+- 부모 컴포넌트에서 자식 컴포넌트로 부터 수신받은 값을 처리합니다.
+  - 처리하는 방법: `메서드명(인자) { ... }`

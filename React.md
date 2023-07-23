@@ -1112,3 +1112,16 @@ root.render(
 
 1. JSX에선 frameBorder로 사용해야 한다.
 2. 비슷한 예로, JSX에선 태그에 클래스명을 사용할 때 `class`가 아닌 `className`을 사용해야 하는 것이 있다.
+   </br>
+   </br>
+
+### Failed to get remote.origin.url 오류 해결
+
+```
+Failed to get remote.origin.url (task must either be run in a git repository with a configured origin remote or must be configured with the "repo" option).
+```
+
+- **git remote origin을 변경해줘야 한다.**
+
+1. git remote -v를 했을 때 origin의 경로가 잘못되어있다면 맞게 고쳐야 한다.
+2. origin으로 잘 되어있고 경로가 잘못된 것이 아니라면 git의 경로 중 `http와 SSH 중 처음 것과 다른 걸로` 변경해줘야 한다.
