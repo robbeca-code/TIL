@@ -644,17 +644,41 @@ const selected = ref('구 선택')
 </script>
 ```
 
-1. **$emit을 활용하는 이유**
+- **$emit을 활용하는 이유**
 
-- 컴포넌트는 내장 메서드 $emit을 활용해서 직접 사용자 정의 이벤트를 발신할 수 있다.
-- 주로 자식 컴포넌트에서 부모 컴포넌트로 데이터를 전송할 때 사용된다.
+1. 컴포넌트는 내장 메서드 $emit을 활용해서 직접 사용자 정의 이벤트를 발신할 수 있다.
+2. 주로 자식 컴포넌트에서 부모 컴포넌트로 데이터를 전송할 때 사용된다.
 
-2. **$emit 활용 방법**
+- **$emit 활용 방법**
 
-- 부모 컴포넌트에서 자식 컴포넌트에게 v-on을 사용하여 수신한다.
-  - `<ShowList @부모컴포넌트_emit명="메서드명" />`
-- 자식 컴포넌트에서 부모 컴포넌트로부터 받은 emits을 정의하고 값을 수신합니다.
-  - 정의하는 방법: `emits: ['부모 컴포넌트의 emit명', ...]`
-  - 데이터를 수신하는 방법: `this.$emit('부모_컴포넌트의_emit', 데이터)`
-- 부모 컴포넌트에서 자식 컴포넌트로 부터 수신받은 값을 처리합니다.
-  - 처리하는 방법: `메서드명(인자) { ... }`
+  - 부모 컴포넌트에서 자식 컴포넌트에게 v-on을 사용하여 수신한다.
+    - `<ShowList @부모컴포넌트_emit명="메서드명" />`
+  - 자식 컴포넌트에서 부모 컴포넌트로부터 받은 emits을 정의하고 값을 수신합니다.
+    - 정의하는 방법: `emits: ['부모 컴포넌트의 emit명', ...]`
+    - 데이터를 수신하는 방법: `this.$emit('부모_컴포넌트의_emit', 데이터)`
+  - 부모 컴포넌트에서 자식 컴포넌트로 부터 수신받은 값을 처리합니다. - 처리하는 방법: `메서드명(인자) { ... }`
+    </br>
+    </br>
+
+### **Vue에서 naver map api를 사용할 때 주의할 점**
+
+```html
+<!-- naver map api를 사용 가능한 구조(HTMLelement O)-->
+<template>
+  <div>
+    <div id="map"></div>
+  </div>
+</template>
+
+<!-- naver map api 사용 불가능한 구조(HTMLelement X)-->
+<template>
+  <div v-if="clickedBtn">
+    <div id="map"></div>
+  </div>
+</template>
+```
+
+- **error: invalid type: "mapdiv" must be a string or htmlelement. 발생**
+
+1. `<div id="map"></div>`은 naver map api가 생성될 element이다.
+2. 어떤 구조 안에 `<div id="map">`을 넣어야 한다면, **무조건 HTMLelement가 와야 해당 오류가 발생하지 않는다.**
