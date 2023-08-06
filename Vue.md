@@ -682,3 +682,18 @@ const selected = ref('구 선택')
 
 1. `<div id="map"></div>`은 naver map api가 생성될 element이다.
 2. 어떤 구조 안에 `<div id="map">`을 넣어야 한다면, **무조건 HTMLelement가 와야 해당 오류가 발생하지 않는다.**
+   </br>
+   </br>
+
+### **err_ssl_protocol_error 원인과 해결방법**
+
+- **오류가 발생한 원인**
+
+1. REST API 중 http인 API를 활용하고 Git Page에 배포했더니 발생했다.
+2. Git Page는 자동으로 `https를 적용하여 모든 http 요청을 https로 변경`해준다.
+3. 따라서 `https 서버에서 http인 API를 불러와` 해당 오류가 발생하게 되었다.
+
+- **해결방법**
+
+1. 도메인을 직접 구매해서 서버를 API와 동일하게 http로 환경을 만들어주면 된다.
+   err_ssl_protocol_error

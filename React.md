@@ -1125,3 +1125,56 @@ Failed to get remote.origin.url (task must either be run in a git repository wit
 
 1. git remote -v를 했을 때 origin의 경로가 잘못되어있다면 맞게 고쳐야 한다.
 2. origin으로 잘 되어있고 경로가 잘못된 것이 아니라면 git의 경로 중 `http와 SSH 중 처음 것과 다른 걸로` 변경해줘야 한다.
+   </br>
+   </br>
+
+### Too many re-renders. React limits the number of renders to prevent an infinite loop. 오류 해결
+
+```js
+// 변경 전 코드
+<ul className="pagination-container">
+  {paginationaUnits.map((pageNum) => {
+    return (
+      <li
+        key={pageNum}
+        onClick={changeCurrentPage(pageNum)}  // 이 부분에서 오류가 발생함.
+        className={
+          pageNum === currentPage ? "select-page page-btn" : "page-btn"
+        }
+      >
+        <button type="button" className="page-text">
+          {pageNum}
+        </button>
+      </li>
+    );
+  })}
+</ul>
+
+
+// 변경 후 코드
+<ul className="pagination-container">
+  {paginationaUnits.map((pageNum) => {
+    return (
+      <li
+        key={pageNum}
+        onClick={() => changeCurrentPage(pageNum)}  // 화살표 함수로 변경
+        className={
+          pageNum === currentPage ? "select-page page-btn" : "page-btn"
+        }
+      >
+        <button type="button" className="page-text">
+          {pageNum}
+        </button>
+      </li>
+    );
+  })}
+</ul>
+```
+
+- **오류가 발생한 원인**
+
+1. React는 useState를 변경하는 함수가 있다면 계속해서 리렌더링된다.
+
+- **해결방법**
+
+2. 해당 함수를 호출할 때 `화살표 함수로 해당 함수를 실행한다.`

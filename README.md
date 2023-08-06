@@ -154,6 +154,10 @@
 
 #### DOM property `frameborder`. Did you mean `frameBorder`? 오류 해결
 
+#### Failed to get remote.origin.url 오류 해결
+
+#### Too many re-renders. React limits the number of renders to prevent an infinite loop. 오류 해결
+
 ---
 
 ## [Vue](Vue.md)
@@ -195,3 +199,5 @@
 #### $emit을 활용해서 자식 컴포넌트에서 부모 컴포넌트로 값 전달하기
 
 #### Vue에서 naver map api를 사용할 때 주의할 점
+
+#### err_ssl_protocol_error 원인과 해결방법
